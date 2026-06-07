@@ -1,19 +1,18 @@
 cask "flux" do
-  version "0.2.6"
-  sha256 "c7e1e8ddac514517eb2f7526ebd66862a9611d1461505b66f41ef5b8c362a6ee"
+  version :latest
+  sha256 :no_check
 
-  url "https://github.com/FerroxLabs/flux-desktop/releases/download/v#{version}/Flux_#{version}_universal.dmg",
-      verified: "github.com/FerroxLabs/flux-desktop/"
+  # flux-desktop is a private repo, so its GitHub release assets are not publicly
+  # downloadable. fluxrouter.ai/api/download/mac is the public endpoint: it
+  # 302-redirects to the latest signed universal .dmg. It only serves "latest",
+  # hence version :latest / sha256 :no_check (integrity still covered by HTTPS +
+  # the app's Developer ID signature, which macOS verifies at launch).
+  url "https://fluxrouter.ai/api/download/mac"
   name "Flux"
   desc "Menu-bar app that routes AI coding tools through Flux Router"
   homepage "https://fluxrouter.ai/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
-
-  depends_on :macos
+  depends_on macos: ">= :ventura"
 
   app "Flux.app"
 
