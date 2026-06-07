@@ -12,7 +12,7 @@ cask "flux" do
   desc "Menu-bar app that routes AI coding tools through Flux Router"
   homepage "https://fluxrouter.ai/"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Flux.app"
 
