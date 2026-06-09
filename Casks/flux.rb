@@ -16,15 +16,10 @@ cask "flux" do
 
   app "Flux.app"
 
-  # Flux is Developer-ID signed but not yet Apple-notarized (account-level notary
-  # hold on the signing team). Homebrew quarantines downloads, so without this an
-  # un-notarized app would hit the Gatekeeper "cannot verify" wall. Strip the
-  # quarantine flag from the freshly-installed, signed app so it opens cleanly.
-  # REMOVE this block once notarization is enabled (then plain Gatekeeper passes).
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Flux.app"]
-  end
+  # Flux is Developer-ID signed AND Apple-notarized (since v0.2.8), so Gatekeeper
+  # verifies it normally — no quarantine workaround needed. (Earlier versions
+  # stripped com.apple.quarantine here while the account's notary hold was
+  # active; that hack was removed once notarization shipped.)
 
   uninstall launchctl: "ai.fluxrouter.daemon",
             quit:      "ai.fluxrouter.desktop"
