@@ -2,6 +2,32 @@
 
 Homebrew casks for Ferrox Labs apps.
 
+## Wayland
+
+Local-first desktop AI agent that drives every AI CLI on your machine (Claude
+Code, Codex, Gemini, and more), on your keys.
+
+```sh
+brew install --cask ferroxlabs/tap/wayland
+```
+
+or:
+
+```sh
+brew tap ferroxlabs/tap
+brew install --cask wayland
+```
+
+Upgrade / uninstall:
+
+```sh
+brew upgrade --cask wayland
+brew uninstall --cask wayland
+```
+
+The app is signed with a Developer ID and notarized by Apple, so it opens with a
+normal double-click, no Gatekeeper prompts.
+
 ## Flux Desktop
 
 ```sh
@@ -24,8 +50,5 @@ brew uninstall --cask flux
 
 ### Note on Gatekeeper
 
-Flux is signed with a Developer ID certificate. Apple notarization is pending a
-service-side hold on the signing account, so until that clears the cask strips
-the download quarantine flag on install, which lets the signed app open without
-the macOS "cannot verify" prompt. Once notarization is enabled the quarantine
-strip is removed and standard Gatekeeper verification applies.
+Flux is signed with a Developer ID certificate and Apple-notarized (since v0.2.8),
+so Gatekeeper verifies it normally.
